@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Optional: Add any environment variables the frontend needs during RUNTIME.
+      # Note: Vite injects most env vars at build time, but runtime vars can be placed here.
+      - NODE_ENV=production
+    restart: unless-stopped
