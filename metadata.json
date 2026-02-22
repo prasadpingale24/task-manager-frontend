@@ -1,0 +1,5 @@
+{
+  "name": "Team Task Manager",
+  "description": "A React thin-client for a FastAPI backend to manage team tasks and projects.",
+  "requestFramePermissions": []
+}
