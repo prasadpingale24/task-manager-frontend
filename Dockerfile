@@ -10,6 +10,8 @@ RUN npm ci
 # Copy the rest of the application code
 COPY . .
 
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 # Build the application for production
 # This will create a 'dist' directory
 RUN npm run build
