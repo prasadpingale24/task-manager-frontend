@@ -20,5 +20,12 @@ export default defineConfig(({mode}) => {
       // Do not modify file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
+    // @ts-ignore
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts'],
+      include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    },
   };
 });
