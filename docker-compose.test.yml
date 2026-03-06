@@ -1,0 +1,8 @@
+services:
+  frontend-test:
+    build:
+      context: .
+      target: builder
+    environment:
+      - NODE_ENV=test
+    command: npm run test
