@@ -7,7 +7,7 @@ def IMAGE_TAG = 'latest'
 def projectConfig = [
     projectName: 'Frontend',
     vars: [
-        'VITE_API_BASE_URL': 'http://72.60.78.85:8000',
+        'VITE_API_BASE_URL': 'http://72.60.78.85:8000/api/v1',
         'NODE_ENV': 'production',
         'IMAGE_TAG': "${IMAGE_TAG}"
     ]
