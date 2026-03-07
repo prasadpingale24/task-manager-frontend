@@ -1,29 +1,32 @@
-@Library('Shared') _
+@Library("Shared") _
+
+def DOCKER_USER = 'prasadpingale24'
+def IMAGE_NAME = 'task-manager-frontend'
+def IMAGE_TAG = 'latest'
+
+def projectConfig = [
+    projectName: 'Frontend',
+    vars: [
+        'VITE_API_BASE_URL': 'http://72.60.78.85:8000',
+        'NODE_ENV': 'production',
+        'IMAGE_TAG': "${IMAGE_TAG}"
+    ]
+]
+
 pipeline {
     agent { label 'scott'}
 
-    environment {
-        IMAGE_NAME = 'task-manager-frontend'
-        IMAGE_TAG = 'latest'
-        DOCKER_USER = 'prasadpingale24'
-    }
-
     stages{
-        stage('Checkout'){
-            steps{
-                checkout scm
-            }
-        }
 
         stage('Prepare Environment'){
             steps{
-                prepare_env()
+                prepareEnv(projectConfig)
             }
         }
 
         stage('Test'){
             steps{
-                docker_testing()
+                docker_test('frontend-test')
             }
         }
 
@@ -42,6 +45,12 @@ pipeline {
         stage('Deploy'){
             steps{
                 docker_deploy()
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                healthCheck(url: "http://72.60.78.85:3000", maxRetries: 12, retryInterval: 10)
             }
         }
     }
