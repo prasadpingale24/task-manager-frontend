@@ -2,6 +2,9 @@
 
 A sleek, responsive, and high-performance task management interface built with React and Vite. Designed for professional teams who need a clean and efficient workspace.
 
+## 🌐 Live Demo
+Experience the application live: [http://72.60.78.85:3000](http://72.60.78.85:3000)
+
 ## 🚀 Key Features
 
 - **Blazing Fast Performance**: Built with Vite and optimized for instant loading.
@@ -36,9 +39,11 @@ Detailed technical documentation: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 │   ├── types/        # TypeScript interfaces & API response types
 │   ├── App.tsx       # Main routing & provider configuration
 │   └── main.tsx      # Application entry point
+├── docs/             # Technical documentation & architecture
 ├── public/           # Static assets
 ├── Dockerfile        # Production-grade multi-stage build
 ├── docker-compose.yml# Service orchestration
+├── docker-compose.test.yml # Test environment orchestration
 └── Jenkinsfile       # Automated CI/CD pipeline
 ```
 
