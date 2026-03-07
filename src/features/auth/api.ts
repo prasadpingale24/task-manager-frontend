@@ -7,15 +7,22 @@ export const useLogin = () => {
   const setAuth = useAuthStore((state) => state.setAuth);
   
   return useMutation({
-    mutationFn: async (data: any) => {
-      const res = await apiClient.post<TokenResponse>("/auth/login", data);
-      return res.data;
+    mutationFn: async (credentials: any) => {
+      // 1. Login to get token
+      const loginRes = await apiClient.post<TokenResponse>("/auth/login", credentials);
+      const { access_token } = loginRes.data;
+      
+      // 2. Temporarily set token in axios instance for the profile call
+      // (The interceptor will pick it up from the store, but we set it here to be safe)
+      useAuthStore.setState({ token: access_token });
+      
+      // 3. Fetch profile
+      const userRes = await apiClient.get<UserResponse>(`/auth/me`);
+      
+      return { token: access_token, user: userRes.data };
     },
-    onSuccess: async (data) => {
-      // After getting token, fetch profile
-      useAuthStore.setState({ token: data.access_token });
-      const userRes = await apiClient.get<UserResponse>("/auth/me");
-      setAuth(data.access_token, userRes.data);
+    onSuccess: (data) => {
+      setAuth(data.token, data.user);
     },
   });
 };
