@@ -7,7 +7,7 @@ def IMAGE_TAG = 'latest'
 def projectConfig = [
     projectName: 'Frontend',
     vars: [
-        'VITE_API_BASE_URL': 'http://72.60.78.85:8000/api/v1',
+        'VITE_API_BASE_URL': 'https://api.crewflow.pspworks.cloud/api/v1',
         'NODE_ENV': 'production',
         'IMAGE_TAG': "${IMAGE_TAG}"
     ]
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                healthCheck(url: "http://72.60.78.85:3000", maxRetries: 12, retryInterval: 10)
+                healthCheck(url: "https://crewflow.pspworks.cloud", maxRetries: 12, retryInterval: 10)
             }
         }
     }
